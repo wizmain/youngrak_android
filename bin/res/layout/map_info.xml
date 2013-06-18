@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:gesture-image="http://schemas.polites.com/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" android:background="@color/white">
+    
+    
+    <include layout="@layout/top_menubar" android:id="@+id/top_menubar" android:layout_width="fill_parent" 
+        android:layout_height="44dp" />
+    
+    <com.youngrak.FullScrollView android:id="@+id/mapScrollView" android:layout_width="fill_parent" android:layout_height="fill_parent"
+        >
+        
+    
+	
+    <FrameLayout android:id="@+id/frameLayout" android:layout_width="1653dp" android:layout_height="1122dp">
+        <!-- 
+	    <com.polites.android.GestureImageView android:id="@+id/map1" 
+	        android:layout_width="fill_parent"
+	        android:layout_height="fill_parent"
+	        android:src="@drawable/map1"
+	        gesture-image:min-scale="0.1"
+	        gesture-image:max-scale="10.0"
+	        gesture-image:strict="false"
+	        />
+	    -->
+	    <ImageView
+	        android:id="@+id/map1"
+	        android:layout_width="fill_parent"
+	        android:layout_height="fill_parent"
+	        android:scaleType="matrix"
+	        android:src="@drawable/map3" />
+	    
+	    <!-- 철쭉묘역 -->
+	    <LinearLayout android:id="@+id/popup1" android:layout_width="110dp" android:layout_height="130dp"
+	        android:background="@drawable/tbox"
+	        android:orientation="vertical" android:gravity="center|center_vertical"
+	        android:paddingBottom="30dp" android:paddingLeft="5dp" android:paddingRight="5dp" android:paddingTop="5dp"
+		    android:layout_marginLeft="170dp" android:layout_marginTop="230dp"
+		    android:visibility="gone" >
+		    <TextView android:text="철쭉묘역" android:layout_height="wrap_content" android:layout_width="wrap_content" 
+		        android:textSize="14sp" android:textColor="@color/darkText"
+		        android:layout_alignParentTop="true" android:layout_centerHorizontal="true"/>
+		    <ImageView android:layout_width="100dp" android:layout_height="80dp" 
+		        android:src="@drawable/map_chunljuk" android:layout_alignParentBottom="true" android:layout_centerHorizontal="true"
+		        android:scaleType="fitXY"/>
+	    </LinearLayout>
+	    <Button android:id="@+id/point1Button" android:text="" android:layout_width="150dp" android:layout_height="60dp" 
+	        android:layout_marginLeft="150dp" android:layout_marginTop="330dp"
+	        android:background="#0000"/>
+	    
+	    <!-- 관리사무소 -->
+	    <LinearLayout android:id="@+id/popup2" android:layout_width="110dp" android:layout_height="110dp"
+	        android:background="@drawable/tbox"
+	        android:orientation="vertical" android:gravity="center"
+	        android:paddingBottom="12dp"
+		    android:layout_marginLeft="260dp" android:layout_marginTop="10dp"
+		    android:visibility="gone">
+		    <TextView android:text="관리사무소" android:layout_height="wrap_content" android:layout_width="wrap_content" 
+		        android:textSize="14sp" android:textColor="@color/darkText"
+		        android:layout_alignParentTop="true" android:layout_centerHorizontal="true"/>
+		    <ImageView android:layout_width="100dp" android:layout_height="60dp" 
+		        android:src="@drawable/map_manager" android:scaleType="fitXY"/>
+	    </LinearLayout>
+	    <Button android:id="@+id/point2Button" android:text="" android:layout_width="100dp" android:layout_height="60dp" 
+	        android:layout_marginLeft="260dp" android:layout_marginTop="100dp"
+	        android:background="#0000"/>
+	    
+	    
+	    <!-- 6위용 가족묘 -->
+	    <LinearLayout android:id="@+id/popup3" android:layout_width="110dp" android:layout_height="110dp"
+	        android:background="@drawable/tbox" 
+	        android:orientation="vertical" android:gravity="center"
+	        android:paddingBottom="12dp"
+		    android:layout_marginLeft="320dp" android:layout_marginTop="180dp"
+		    android:visibility="gone">
+		    <TextView android:text="6위용가족묘" android:layout_height="wrap_content" android:layout_width="wrap_content" 
+		        android:textSize="14sp" android:textColor="@color/darkText"
+		        android:layout_alignParentTop="true" android:layout_centerHorizontal="true"/>
+		    <ImageView android:layout_width="100dp" android:layout_height="60dp" 
+		        android:src="@drawable/map_6weyoung" android:scaleType="fitXY"/>
+	    </LinearLayout>
+	    <Button android:id="@+id/point3Button" android:text="" android:layout_width="100dp" android:layout_height="60dp" 
+	        android:layout_marginLeft="320dp" android:layout_marginTop="270dp"
+	        android:background="#0000"/>
+
+	    <!-- 12위용가족묘 -->
+	    <LinearLayout android:id="@+id/popup4" android:layout_width="110dp" android:layout_height="110dp"
+	        android:background="@drawable/tbox" android:gravity="center"
+	        android:orientation="vertical"
+	        android:paddingBottom="12dp"
+		    android:layout_marginLeft="460dp" android:layout_marginTop="60dp"
+		    android:visibility="gone">
+		    <TextView android:text="12위용가족묘" android:layout_height="wrap_content" android:layout_width="wrap_content" 
+		        android:textSize="14sp" android:textColor="@color/darkText"
+		        android:layout_alignParentTop="true" android:layout_centerHorizontal="true"/>
+		    <ImageView android:layout_width="100dp" android:layout_height="60dp" 
+		        android:src="@drawable/map_12weyoung" android:scaleType="fitXY"/>
+	    </LinearLayout>
+	    <Button android:id="@+id/point4Button" android:text="" android:layout_width="100dp" android:layout_height="60dp" 
+	        android:layout_marginLeft="460dp" android:layout_marginTop="150dp"
+	        android:background="#0000"/>
+
+	    <!-- 평장 -->
+	    <LinearLayout android:id="@+id/popup5" android:layout_width="110dp" android:layout_height="110dp"
+	        android:background="@drawable/tbox" android:gravity="center"
+	        android:orientation="vertical"
+	        android:paddingBottom="12dp"
+		    android:layout_marginLeft="625dp" android:layout_marginTop="360dp"
+		    android:visibility="gone">
+		    <TextView android:text="평장" android:layout_height="wrap_content" android:layout_width="wrap_content" 
+		        android:textSize="14sp" android:textColor="@color/darkText"
+		        android:layout_alignParentTop="true" android:layout_centerHorizontal="true"/>
+		    <ImageView android:layout_width="100dp" android:layout_height="60dp" 
+		        android:src="@drawable/map_pyungjang" android:scaleType="fitXY"/>
+	    </LinearLayout>
+	    <Button android:id="@+id/point5Button" android:text="" android:layout_width="100dp" android:layout_height="40dp" 
+	        android:layout_marginLeft="630dp" android:layout_marginTop="470dp"
+	        android:background="#0000"/>
+	    
+	    <!-- 개나리 -->
+	    <LinearLayout android:id="@+id/popup6" android:layout_width="110dp" android:layout_height="110dp"
+	        android:background="@drawable/tbox" android:gravity="center"
+	        android:orientation="vertical"
+	        android:paddingBottom="12dp"
+		    android:layout_marginLeft="720dp" android:layout_marginTop="400dp"
+		    android:visibility="gone">
+		    <TextView android:text="개나리묘역" android:layout_height="wrap_content" android:layout_width="wrap_content" 
+		        android:textSize="14sp" android:textColor="@color/darkText"
+		        android:layout_alignParentTop="true" android:layout_centerHorizontal="true"/>
+		    <ImageView android:layout_width="100dp" android:layout_height="60dp" 
+		        android:src="@drawable/map_gaenari" android:scaleType="fitXY"/>
+	    </LinearLayout>
+	    <Button android:id="@+id/point6Button" android:text="" android:layout_width="140dp" android:layout_height="60dp" 
+	        android:layout_marginLeft="700dp" android:layout_marginTop="500dp"
+	        android:background="#0000"/>
+	    
+	    <!-- 청마루자연 -->
+	    <LinearLayout android:id="@+id/popup7" android:layout_width="160dp" android:layout_height="100dp"
+	        android:background="@drawable/tbox" 
+	        android:orientation="vertical" android:gravity="center"
+	        android:paddingBottom="12dp"
+		    android:layout_marginLeft="290dp" android:layout_marginTop="120dp"
+		    android:visibility="gone">
+		    <TextView android:text="청마루자연" android:layout_height="wrap_content" android:layout_width="wrap_content" 
+		        android:textSize="14sp" android:textColor="@color/darkText"
+		        android:layout_alignParentTop="true" android:layout_centerHorizontal="true"/>
+		    <ImageView android:layout_width="150dp" android:layout_height="60dp" 
+		        android:src="@drawable/map_jayung" android:scaleType="fitXY"/>
+	    </LinearLayout>
+	    <Button android:id="@+id/point7Button" android:text="" android:layout_width="100dp" android:layout_height="60dp" 
+	        android:layout_marginLeft="330dp" android:layout_marginTop="210dp"
+	        android:background="#0000"/>
+	    
+	    <!-- 승화원 -->
+	    <LinearLayout android:id="@+id/popup8" android:layout_width="110dp" android:layout_height="100dp"
+	        android:background="@drawable/tbox"
+	        android:orientation="vertical" android:gravity="center|center_vertical"
+	        android:paddingBottom="20dp" android:paddingLeft="5dp" android:paddingRight="5dp" android:paddingTop="5dp"
+		    android:layout_marginLeft="170dp" android:layout_marginTop="0dp"
+		    android:visibility="gone" >
+		    <TextView android:text="화장장" android:layout_height="wrap_content" android:layout_width="wrap_content" 
+		        android:textSize="14sp" android:textColor="@color/darkText"
+		        android:layout_alignParentTop="true" android:layout_centerHorizontal="true"/>
+		    <ImageView android:layout_width="100dp" android:layout_height="60dp" 
+		        android:src="@drawable/map_sungwha" android:layout_alignParentBottom="true" android:layout_centerHorizontal="true"
+		        android:scaleType="fitXY"/>
+	    </LinearLayout>
+	    <Button android:id="@+id/point8Button" android:text="" android:layout_width="150dp" android:layout_height="60dp" 
+	        android:layout_marginLeft="150dp" android:layout_marginTop="100dp"
+	        android:background="#0000"/>
+	    
+	    
+	    <!-- 제1추모관 봉안당 -->
+	    <LinearLayout android:id="@+id/popup9" android:layout_width="110dp" android:layout_height="110dp"
+	        android:background="@drawable/tbox"
+	        android:orientation="vertical" android:gravity="center"
+	        android:paddingBottom="12dp"
+		    android:layout_marginLeft="260dp" android:layout_marginTop="0dp"
+		    android:visibility="gone">
+		    <TextView android:text="제1추모관" android:layout_height="wrap_content" android:layout_width="wrap_content" 
+		        android:textSize="14sp" android:textColor="@color/darkText"
+		        android:layout_alignParentTop="true" android:layout_centerHorizontal="true"/>
+		    <ImageView android:layout_width="100dp" android:layout_height="60dp" 
+		        android:src="@drawable/map_manager" android:scaleType="fitXY"/>
+	    </LinearLayout>
+	    <Button android:id="@+id/point9Button" android:text="" android:layout_width="100dp" android:layout_height="60dp" 
+	        android:layout_marginLeft="260dp" android:layout_marginTop="100dp"
+	        android:background="#0000"/>
+	    
+	    <!-- 제2추모관 -->
+	    <LinearLayout android:id="@+id/popup10" android:layout_width="110dp" android:layout_height="110dp"
+	        android:background="@drawable/tbox" 
+	        android:orientation="vertical" android:gravity="center"
+	        android:paddingBottom="12dp"
+		    android:layout_marginLeft="470dp" android:layout_marginTop="180dp"
+		    android:visibility="gone">
+		    <TextView android:text="제2추모관" android:layout_height="wrap_content" android:layout_width="wrap_content" 
+		        android:textSize="14sp" android:textColor="@color/darkText"
+		        android:layout_alignParentTop="true" android:layout_centerHorizontal="true"/>
+		    <ImageView android:layout_width="100dp" android:layout_height="60dp" 
+		        android:src="@drawable/map_2chumo" android:scaleType="fitXY"/>
+	    </LinearLayout>
+	    <Button android:id="@+id/point10Button" android:text="" android:layout_width="100dp" android:layout_height="60dp" 
+	        android:layout_marginLeft="470dp" android:layout_marginTop="270dp"
+	        android:background="#0000"/>
+	    
+    </FrameLayout>
+    
+    </com.youngrak.FullScrollView>
+    
+</LinearLayout>

@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" android:background="@drawable/main_bg">
+    
+    <include layout="@layout/top_menubar" android:id="@+id/top_menubar" android:layout_width="fill_parent" 
+        android:layout_height="44dp" />
+    
+	<LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content"
+	    android:orientation="vertical" >
+	    
+	    <LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content"
+	    	android:orientation="horizontal" android:padding="5dp" android:gravity="center_vertical|center"
+	    	android:background="#f4f4f4" >
+	    	<!-- 
+	    	<ImageView android:id="@+id/userImage" android:layout_width="100dp" android:layout_height="100dp"
+	    	    android:src="@drawable/photo_blank"/>
+	    	-->
+	    	<LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content"
+	    		android:orientation="vertical" android:gravity="center">
+	    		<TextView android:id="@+id/userName" android:layout_width="wrap_content" android:layout_height="wrap_content" 
+	    		    android:text="홍길동" android:textSize="24sp" android:textStyle="bold" android:textColor="@color/darkText"
+	    		    android:layout_marginBottom="10dp" android:layout_marginLeft="0dp"/>
+	    		<LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content"
+	    			android:orientation="horizontal">
+	    			<ImageButton android:id="@+id/infoButton1" android:layout_width="wrap_content" android:layout_height="wrap_content" 
+	    			    android:src="@drawable/btn_location" android:background="#0000"
+	    			    android:layout_marginRight="10dp"/>
+	    			<ImageButton android:id="@+id/infoButton2" android:layout_width="wrap_content" android:layout_height="wrap_content" 
+	    			    android:src="@drawable/btn_tribute_request_s" android:background="#0000"/>
+	    		</LinearLayout>
+	    	</LinearLayout>
+	    </LinearLayout>
+	    <ProgressBar android:id="@+id/pageLoading" android:layout_width="wrap_content" android:layout_height="wrap_content" 
+			android:layout_gravity="center" android:visibility="gone" 
+			android:layout_centerInParent="true"/>
+	    <TableLayout 
+		    android:layout_width="fill_parent"
+		    android:layout_height="wrap_content" 
+		    android:layout_marginTop="0dip" android:layout_marginLeft="5dip" android:layout_marginRight="5dip">
+		    <TableRow android:gravity="left|center_vertical" android:layout_marginTop="10dip" android:layout_marginLeft="5dp"
+		        android:background="@drawable/list_row_back" android:layout_gravity="center_vertical"
+		        android:padding="5dp">
+		        <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content" 
+		            android:src="@drawable/blt_cc"/>
+		        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+		            android:text="성별 : " android:textSize="18sp"/>
+		        <TextView android:id="@+id/userSex" android:layout_width="wrap_content" android:layout_height="wrap_content" 
+		            android:textSize="18sp" android:textColor="@color/darkText"/>
+		    </TableRow>
+		    <TableRow android:gravity="left|center_vertical" android:layout_marginTop="10dip" android:layout_marginLeft="5dp"
+		        android:background="@drawable/list_row_back" android:layout_gravity="center_vertical"
+		        android:padding="5dp">
+		        <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content" 
+		            android:src="@drawable/blt_cc"/>
+		        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+		            android:text="안치일자 : " android:textSize="18sp"/>
+		        <TextView android:id="@+id/buryDate" android:layout_width="wrap_content" android:layout_height="wrap_content" 
+		            android:textSize="18sp" android:textColor="@color/darkText"/>
+		    </TableRow>
+		    <TableRow android:gravity="left|center_vertical" android:layout_marginTop="10dip" android:layout_marginLeft="5dp"
+		        android:background="@drawable/list_row_back" android:layout_gravity="center_vertical"
+		        android:padding="5dp">
+		        <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content" 
+		            android:src="@drawable/blt_cc"/>
+		        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+		            android:text="구분 : " android:textSize="18sp"/>
+		        <TextView android:id="@+id/areaType" android:layout_width="wrap_content" android:layout_height="wrap_content" 
+		            android:textSize="18sp" android:textColor="@color/darkText"/>
+		    </TableRow>
+		    <TableRow android:gravity="left|center_vertical" android:layout_marginTop="10dip" android:layout_marginLeft="5dp"
+		        android:background="@drawable/list_row_back" android:layout_gravity="center_vertical"
+		        android:padding="5dp">
+		        <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content" 
+		            android:src="@drawable/blt_cc"/>
+		        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+		            android:text="안치번호 : " android:textSize="18sp"/>
+		        <TextView android:id="@+id/deadID" android:layout_width="wrap_content" android:layout_height="wrap_content" 
+		            android:textSize="18sp" android:textColor="@color/darkText"/>
+		    </TableRow>
+		    <TableRow android:gravity="left|center_vertical" android:layout_marginTop="10dip" android:layout_marginLeft="5dp"
+		        android:background="@drawable/list_row_back" android:layout_gravity="center_vertical"
+		        android:padding="5dp">
+		        <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content" 
+		            android:src="@drawable/blt_cc"/>
+		        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+		            android:text="사망일자 : " android:textSize="18sp"/>
+		        <TextView android:id="@+id/deadDate" android:layout_width="wrap_content" android:layout_height="wrap_content" 
+		            android:textSize="18sp" android:textColor="@color/darkText"/>
+		    </TableRow>
+		    <TableRow android:gravity="left|center_vertical" android:layout_marginTop="10dip" android:layout_marginLeft="5dp"
+		        android:background="@drawable/list_row_back" android:layout_gravity="center_vertical"
+		        android:padding="5dp">
+		        <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content" 
+		            android:src="@drawable/blt_cc"/>
+		        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+		            android:text="신청자명 : " android:textSize="18sp"/>
+		        <TextView android:id="@+id/payName" android:layout_width="wrap_content" android:layout_height="wrap_content" 
+		            android:textSize="18sp" android:textColor="@color/darkText"/>
+		    </TableRow>
+		</TableLayout>
+	</LinearLayout>
+</LinearLayout>
