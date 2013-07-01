@@ -25,12 +25,12 @@ public class Introduce6_4 extends BaseActivity {
         listview = (ListView)findViewById(R.id.listview);
         
         listData = new ArrayList<String>();
-        listData.add("화장시설");
+        listData.add("승화원시설");
         listData.add("일반매장");
-        listData.add("추모관(봉안당)");
+        listData.add("추모관");
         listData.add("자연장");
         listData.add("가족봉안묘");
-        listData.add("2기평장분묘");
+        listData.add("평장분묘");
         
         
         adapter = new BasicListAdapter(this, R.layout.basic_row, listData);

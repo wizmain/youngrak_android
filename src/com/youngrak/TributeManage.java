@@ -59,7 +59,7 @@ public class TributeManage extends BaseActivity {
         
         listData = new ArrayList<String>();
         listData.add("고인 사진 변경");
-        listData.add("동영상 파일");
+        listData.add("동영상 및 육성 파일");
         listData.add("추모앨범");
         
         adapter = new BasicListAdapter(this, R.layout.basic_row, listData);

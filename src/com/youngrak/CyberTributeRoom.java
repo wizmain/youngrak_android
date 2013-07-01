@@ -6,7 +6,9 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
+import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -24,6 +26,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.BitmapFactory.Options;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -41,7 +44,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.AdapterView.OnItemClickListener;
 
-public class CyberTributeRoom extends BaseActivity {
+public class CyberTributeRoom extends BaseActivity implements TributeFlowerDialog.TributeFlowerDialogListener {
 
 	final static String TAG = "CyberTributeRoom";
 	ArrayList<Article> listData;
@@ -51,10 +54,12 @@ public class CyberTributeRoom extends BaseActivity {
 	String cm1ID = "";
 	ProgressBar pageLoading = null;
 	String mMessage = "";
-	ImageButton movieButton, photoButton, manageButton, tributeMessageButton;
+	ImageButton movieButton, photoButton, manageButton, tributeMessageButton, flowerButton;
 	TributeRoom tributeRoom = null;
 	ImageView tributeImage;
 	String tributeMovie = "";
+	String currentTributeFlowerNo;
+	ImageView tributeFlower1, tributeFlower2;
 	
 	@Override
     public void onCreate(Bundle icicle) {
@@ -75,6 +80,9 @@ public class CyberTributeRoom extends BaseActivity {
         photoButton = (ImageButton)findViewById(R.id.photoButton);
         manageButton = (ImageButton)findViewById(R.id.manageButton);
         tributeMessageButton = (ImageButton)findViewById(R.id.tributeMessageButton);
+        flowerButton = (ImageButton)findViewById(R.id.flowerButton);
+        tributeFlower1 = (ImageView)findViewById(R.id.tributeFlower1);
+        tributeFlower2 = (ImageView)findViewById(R.id.tributeFlower2);
         
         LinearLayout memoryTitleLayout = (LinearLayout)findViewById(R.id.memoryTitleLayout);
         memoryTitleLayout.setOnClickListener(new View.OnClickListener() {
@@ -90,6 +98,7 @@ public class CyberTributeRoom extends BaseActivity {
 		});
         
       //?cm1_id2=3266
+        //추모글 바인드
         new ArticleListTask().execute("1");
         
         movieButton.setOnClickListener(new View.OnClickListener() {
@@ -99,9 +108,16 @@ public class CyberTributeRoom extends BaseActivity {
 				if(StringUtils.isEmptyOrBlank(tributeMovie)){
 					DialogUtils.alert(thisContext, "", "동영상이 존재하지 않습니다");
 				} else {
-					Intent i = new Intent(thisContext, MovieView.class);
-					i.putExtra("movieFile", tributeMovie);
-					startActivity(i);
+					//Intent i = new Intent(thisContext, MovieView.class);
+					//i.putExtra("movieFile", tributeMovie);
+					//startActivity(i);
+					
+					
+					String movieUrl = "http://www.cyberyoungrak.or.kr/cms/cyber/cyber_movie/"+tributeMovie;
+					Intent intent = new Intent(Intent.ACTION_VIEW); //I encourage using this instead of specifying the string "android.intent.action.VIEW"
+					Log.d(TAG, "tributeMovie="+movieUrl);
+	    			intent.setDataAndType(Uri.parse(movieUrl), "video/mp4");
+	    			startActivity(intent);
 				}
 				
 			}
@@ -148,6 +164,16 @@ public class CyberTributeRoom extends BaseActivity {
 				Intent i = new Intent(thisContext, TributeMessage.class);
 				i.putExtra("cm1id",cm1ID);
 				startActivityForResult(i,1);
+				
+			}
+		});
+        
+        flowerButton.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				TributeFlowerDialog dialog = new TributeFlowerDialog(thisContext);
+				dialog.show();
 				
 			}
 		});
@@ -215,7 +241,7 @@ public class CyberTributeRoom extends BaseActivity {
 	    }
 	    
 	}
-	
+	//추모글 목록
 	private void requestMemoryList(String type){
 		
 		try{
@@ -268,6 +294,7 @@ public class CyberTributeRoom extends BaseActivity {
     	}
 	}
 	
+	//사이버추모정보
 	private void requestTribute(){
 		
 		try{
@@ -312,6 +339,7 @@ public class CyberTributeRoom extends BaseActivity {
     	}
 	}
 	
+	//동영상
 	private void requestTributeMovie(){
 		
 		try{
@@ -353,7 +381,48 @@ public class CyberTributeRoom extends BaseActivity {
     		//DialogUtils.alert(MyLecture.this, "", e.getMessage());
     	}
 	}
-	
+	//현재헌화꽃
+	private void requestTributeImage(){
+		
+		try{
+			
+			ApplicationEx app = (ApplicationEx)this.getApplication();
+			String url = "";
+			
+			url = Constant.TRIBUTE_IMAGE_URL + "?cm1_id2="+cm1ID;
+			
+			String result = HttpDataHelper.getHttpJsonData(app.getHttpClient(), url, "GET", null, -1);
+			
+			Log.d(TAG, result);
+    		
+			
+    		JSONObject data = new JSONObject(result);
+    		currentTributeFlowerNo = data.getString("cm3_img");
+    		
+		} catch(JSONException e) {
+        	e.printStackTrace();
+        	Log.e(TAG, e.getMessage());
+        	//DialogUtils.alert(thisContext, "", e.getMessage());
+        	mMessage = "JSON 오류가 발생했습니다";
+        	thisHandler.post(showDialog);
+        } catch(ClientProtocolException e) {
+        	e.printStackTrace();
+    		Log.e(TAG, e.getMessage());
+    		//DialogUtils.alert(thisContext, "", "서버 접속에 실패했습니다");
+    		mMessage = "서버 접속에 실패했습니다.";
+    		thisHandler.post(showDialog);
+    	} catch(IOException e) {
+    		e.printStackTrace();
+    		Log.e(TAG, e.getMessage());
+    		//DialogUtils.alert(thisContext, "", "서버에 연결할 수 없습니다");
+    		mMessage = "서버에 연결할 수 없습니다.";
+    		thisHandler.post(showDialog);
+    	} catch(Exception e) {
+    		e.printStackTrace();
+    		//Log.e(TAG, e.getMessage());
+    		//DialogUtils.alert(MyLecture.this, "", e.getMessage());
+    	}
+	}
 	
 	private class ArticleListTask extends AsyncTask<String, Integer, Integer> {
  		
@@ -368,12 +437,14 @@ public class CyberTributeRoom extends BaseActivity {
  		protected Integer doInBackground(String... args) {
 
  			String type = args[0];
+ 			//추모글
  			requestMemoryList(type);
- 			
+ 			//추모관정보
  			requestTribute();
- 			
+ 			//동영상정보
  			requestTributeMovie();
- 			
+ 			//헌화정보
+ 			requestTributeImage();
  			return 0;
  		}
  		
@@ -398,14 +469,15 @@ public class CyberTributeRoom extends BaseActivity {
  	        	if(!StringUtils.isEmptyOrBlank(tributeMovie)) {
  	        		
  	        	}
+ 	        	
+ 	        	if(!StringUtils.isEmptyOrBlank(currentTributeFlowerNo)){
+ 	        		
+ 	        		tributeFlowerSet(currentTributeFlowerNo);
+ 	        	}
  	    	}
     		
  		}
  		
- 		
- 		// AsyncTask.cancel(boolean) 메소드가 true 인자로
- 		// 실행되면 호출되는 콜백.
- 		// background 작업이 취소될때 꼭 해야될 작업은  여기에 구현.
  		@Override
  		protected void onCancelled() {
  			// TODO Auto-generated method stub
@@ -416,6 +488,38 @@ public class CyberTributeRoom extends BaseActivity {
  		}
  	
  	}
+	
+	private void tributeFlowerSet(String flowerNo){
+		if(flowerNo.equals("1")){
+ 			
+     		tributeFlower1.setImageResource(R.drawable.flower01);
+     		tributeFlower2.setImageResource(R.drawable.flower01);
+     		
+ 		} else if(flowerNo.equals("2")){
+ 			
+     		tributeFlower1.setImageResource(R.drawable.flower02);
+     		tributeFlower2.setImageResource(R.drawable.flower02);
+     		
+ 		} else if(flowerNo.equals("3")){
+ 			
+     		tributeFlower1.setImageResource(R.drawable.flower03);
+     		tributeFlower2.setImageResource(R.drawable.flower03);
+     		
+ 		} else if(flowerNo.equals("4")){
+ 			
+     		tributeFlower1.setImageResource(R.drawable.flower04);
+     		tributeFlower2.setImageResource(R.drawable.flower04);
+     		
+ 		} else if(flowerNo.equals("5")){
+ 			
+     		tributeFlower1.setImageResource(R.drawable.flower05);
+     		tributeFlower2.setImageResource(R.drawable.flower05);
+     		
+ 		}
+ 		
+ 		tributeFlower1.setVisibility(View.VISIBLE);
+ 		tributeFlower2.setVisibility(View.VISIBLE);
+	}
  	
  	private class ArticleAdapter extends ArrayAdapter<Article> {
  		
@@ -522,6 +626,95 @@ public class CyberTributeRoom extends BaseActivity {
  		protected void onCancelled() {
  			// TODO Auto-generated method stub
  			super.onCancelled();
+ 		}
+ 	
+ 	}
+
+	@Override
+	public void onTributeFlowerDialogClick(TributeFlowerDialog dialog) {
+		//헌화하기
+		new TributeFlowerTask().execute(Integer.toString(dialog.selectedButton));
+	}
+	
+	private String tributeFlower(String flowerNo){
+		
+		try{
+
+			List<NameValuePair> postParameters = new ArrayList<NameValuePair>();
+	        postParameters.add(new BasicNameValuePair("cm1_id2", cm1ID));
+	        postParameters.add(new BasicNameValuePair("cm3_img", flowerNo));
+	        
+	        String result = HttpDataHelper.getHttpJsonData(appEx.getHttpClient(), Constant.TRIBUTE_FLOWER_URL, "POST", postParameters, -1);
+	        
+	        //String result = HttpDataHelper.getHttpJsonData(httpClient, Constant.SERVER_ADDR_HTTPS, Constant.LOGIN_URL, "POST", postParameters, -1);
+	        Log.d(TAG, result);
+	        
+	        JSONObject data = new JSONObject(result);
+	        
+	        return data.getString("result");
+	        
+		} catch(JSONException e) {
+        	e.printStackTrace();
+        	Log.e(TAG, e.getMessage());
+        	//DialogUtils.alert(thisContext, "", e.getMessage());
+        	mMessage = "JSON 오류가 발생했습니다";
+        	thisHandler.post(showDialog);
+        } catch(ClientProtocolException e) {
+        	e.printStackTrace();
+    		Log.e(TAG, e.getMessage());
+    		//DialogUtils.alert(thisContext, "", "서버 접속에 실패했습니다");
+    		mMessage = "서버 접속에 실패했습니다.";
+    		thisHandler.post(showDialog);
+    	} catch(IOException e) {
+    		e.printStackTrace();
+    		Log.e(TAG, e.getMessage());
+    		//DialogUtils.alert(thisContext, "", "서버에 연결할 수 없습니다");
+    		mMessage = "서버에 연결할 수 없습니다.";
+    		thisHandler.post(showDialog);
+    	} catch(Exception e) {
+    		e.printStackTrace();
+    		//Log.e(TAG, e.getMessage());
+    		//DialogUtils.alert(MyLecture.this, "", e.getMessage());
+    	}
+		
+		return "fail";
+	}
+	
+	private class TributeFlowerTask extends AsyncTask<String, Integer, String> {
+ 		
+		String flowerNo = "-1";
+		
+ 		protected void onPreExecute(){
+ 			super.onPreExecute();
+ 			
+ 			if(pageLoading != null)
+ 				pageLoading.setVisibility(View.VISIBLE);
+ 		}
+ 		
+ 		@Override
+ 		protected String doInBackground(String... args) {
+ 			flowerNo = args[0];
+ 			return tributeFlower(flowerNo);
+ 			
+ 		}
+ 		
+ 		protected void onPostExecute(String result) {
+ 			if(pageLoading != null)
+ 				pageLoading.setVisibility(View.GONE);
+
+ 			if(result.equals("success")){
+ 				tributeFlowerSet(flowerNo);
+ 				
+ 			}
+ 		}
+ 		
+ 		@Override
+ 		protected void onCancelled() {
+ 			
+ 			super.onCancelled();
+ 			
+ 			if(pageLoading != null)
+ 				pageLoading.setVisibility(View.GONE);
  		}
  	
  	}

@@ -119,8 +119,22 @@ public class Webview extends BaseActivity {
     			startActivity(i);
     			return true;
     		}
+    		
+    		if(url.startsWith("http://bis")){
+				Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+				startActivity(i);
+				return true;
+			} else {
+				view.loadUrl(url);
+			}
     		//backPressedCount = 0;// 링크를 클릭해서 들어가면 뒤로가기 버튼 클릭 횟수 초기화 
-    		view.loadUrl(url);
+    		
+    		if(url.startsWith("http://www.cyberyoungrak.or.kr/cms/cyber/cyber_movie")) {
+    			Intent intent = new Intent(Intent.ACTION_VIEW); //I encourage using this instead of specifying the string "android.intent.action.VIEW"
+    			intent.setDataAndType(Uri.parse(url), "video/mp4");
+    			startActivity(intent);
+    		}
+    		
     		return false;
     	}
     	

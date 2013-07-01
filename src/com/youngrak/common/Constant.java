@@ -27,4 +27,5 @@ public class Constant {
 	public static final String TRIBUTE_MESSAGEURL = "/cms/cyber/cyber_memory2_mobile.php";
 	public static final String TRIBUTE_MOVIE_URL = "/cms/cyber/cyber_memory2_form_movie_mobile.php";
 	public static final String VOD_SERVER = "rtsp://www.cyberyoungrak.or.kr:554/vod";
+	public static final String TRIBUTE_FLOWER_URL = "/cms/cyber/cyber_memory3_update_mobile.php";
 }

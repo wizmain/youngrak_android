@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" android:layout_gravity="center">
+    
+    <LinearLayout android:layout_width="fill_parent" android:layout_height="40dp" android:background="@drawable/titlebar_bg"
+        android:gravity="center">
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:text="헌화,분향하기" android:textStyle="bold" android:textSize="18sp" android:textColor="@color/subtitleTextColor"/>
+    </LinearLayout>
+    
+    <LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:background="@color/white"
+        android:gravity="center" android:padding="10dp">
+		<ImageButton android:id="@+id/button1" android:src="@drawable/flower01" 
+		    android:layout_width="wrap_content" android:layout_height="wrap_content"
+		    android:background="#0000" android:tag="1"
+		    android:contentDescription="헌화화환1"/>
+		<ImageButton android:id="@+id/button2" android:src="@drawable/flower02" 
+		    android:layout_width="wrap_content" android:layout_height="wrap_content"
+		    android:background="#0000" android:paddingLeft="20dp" android:paddingRight="20dp"
+		    android:contentDescription="헌화화환2" android:tag="2"/>
+		<ImageButton android:id="@+id/button3" android:src="@drawable/flower03" 
+		    android:layout_width="wrap_content" android:layout_height="wrap_content"
+		    android:background="#0000"
+		    android:contentDescription="헌화화환3" android:tag="3"/>
+	</LinearLayout>
+	<LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:background="@color/white"
+        android:gravity="center" android:padding="10dp">
+    	<ImageButton android:id="@+id/button4" android:src="@drawable/flower04" 
+		    android:layout_width="wrap_content" android:layout_height="wrap_content"
+		    android:background="#0000" android:paddingLeft="20dp" android:paddingRight="20dp"
+		    android:contentDescription="헌화화환4" android:tag="4"/>
+		<ImageButton android:id="@+id/button5" android:src="@drawable/flower05" 
+		    android:layout_width="wrap_content" android:layout_height="wrap_content"
+		    android:background="#0000"
+		    android:contentDescription="헌화화환5" android:tag="5"/>
+	</LinearLayout>
+</LinearLayout>

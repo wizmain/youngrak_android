@@ -63,6 +63,7 @@ public class MyTributeRoom extends BaseActivity {
         //adapter = new TributeRoomAdapter(thisContext, R.layout.user_row, mListData);
         //listview.setAdapter(adapter);
         
+        //데이타바인드
         new PageLoadTask().execute();
 	}
 	
@@ -81,6 +82,7 @@ public class MyTributeRoom extends BaseActivity {
 		new PageLoadTask().execute();
 	}
 	
+	//추모방정보 가져오기
 	private void requestMyTributeRoom(){
 		
 		try{
@@ -125,7 +127,7 @@ public class MyTributeRoom extends BaseActivity {
     		//DialogUtils.alert(MyLecture.this, "", e.getMessage());
     	}
 	}
-	
+	//추모방삭제
 	private void requestDeleteTributeRoom(String cm1ID){
 		
 		try{
@@ -165,9 +167,6 @@ public class MyTributeRoom extends BaseActivity {
 	
 	private class PageLoadTask extends AsyncTask<String, Integer, Integer> {
  		
- 		// 이곳에 포함된 code는 AsyncTask가 execute 되자 마자 UI 스레드에서 실행됨.
- 		// 작업 시작을 UI에 표현하거나
- 		// background 작업을 위한 ProgressBar를 보여 주는 등의 코드를 작성.
  		protected void onPreExecute(){
  			super.onPreExecute();
  			
@@ -183,14 +182,9 @@ public class MyTributeRoom extends BaseActivity {
  			return 0;
  		}
  		
- 		// onInBackground(...)가 완료되면 자동으로 실행되는 callback
- 		// 이곳에서 onInBackground가 리턴한 정보를 UI위젯에 표시 하는 등의 작업을 수행함.
- 		// (예제에서는 작업에 걸린 총 시간을 UI위젯 중 TextView에 표시함)
  		protected void onPostExecute(Integer result) {
  			if(pageLoading != null)
- 				pageLoading.setVisibility(View.GONE);
- 			
- 			
+ 				pageLoading.setVisibility(View.GONE);	
  			
  			if(mListData != null) {
  				Log.d(TAG, "mInterviewData not null length = "+mListData.size());
@@ -202,10 +196,6 @@ public class MyTributeRoom extends BaseActivity {
     		
  		}
  		
- 		
- 		// AsyncTask.cancel(boolean) 메소드가 true 인자로
- 		// 실행되면 호출되는 콜백.
- 		// background 작업이 취소될때 꼭 해야될 작업은  여기에 구현.
  		@Override
  		protected void onCancelled() {
  			// TODO Auto-generated method stub
@@ -217,6 +207,7 @@ public class MyTributeRoom extends BaseActivity {
  	
  	}
 	
+	//추모방삭제 Task
 	private class TributeRoomDeleteTask extends AsyncTask<String, Integer, Integer> {
  		
  		protected void onPreExecute(){

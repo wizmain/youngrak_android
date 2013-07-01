@@ -8,11 +8,21 @@
         android:layout_height="44dp" />
 	<RelativeLayout android:layout_width="fill_parent" android:layout_height="200dp">
 	    <ImageView android:src="@drawable/cyber_distribute" android:layout_width="fill_parent" android:layout_height="fill_parent" />
-	    <ImageView android:src="@drawable/photo_blank" android:id="@+id/cyber_image" android:layout_width="70dp" android:layout_height="70dp" 
-	        android:layout_marginTop="40dp" android:layout_centerHorizontal="true"/>
+	    <ImageView android:src="@drawable/photo_blank" android:id="@+id/cyber_image" android:layout_width="fill_parent" android:layout_height="fill_parent" 
+	        android:layout_marginTop="5dp" android:layout_marginBottom="5dp" android:layout_centerHorizontal="true"
+	        android:scaleType="fitXY" />
 	    <ProgressBar android:id="@+id/pageLoading" android:layout_width="wrap_content" android:layout_height="wrap_content" 
 			android:layout_gravity="center" android:visibility="gone" 
 			android:layout_centerInParent="true"/>
+	    <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content"
+	        android:layout_alignParentBottom="true" android:layout_centerHorizontal="true" 
+	        android:layout_marginBottom="20dp">
+	        <ImageView android:id="@+id/tributeFlower1" android:layout_width="wrap_content" android:layout_height="wrap_content"
+	            android:src="@drawable/flower01" android:layout_marginRight="120dp"
+	            android:visibility="gone"/>
+	        <ImageView android:id="@+id/tributeFlower2" android:layout_width="wrap_content" android:layout_height="wrap_content"
+	            android:src="@drawable/flower01" android:visibility="gone"/>
+	    </LinearLayout>
 	</RelativeLayout>
 	
 	<LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:gravity="center"
@@ -23,6 +33,11 @@
 	        android:layout_width="wrap_content" android:layout_height="wrap_content" android:background="#0000"
 	        android:layout_marginLeft="10dp" android:layout_marginRight="10dp"/>
 	    <ImageButton android:id="@+id/manageButton" android:src="@drawable/button_manage" 
+	        android:layout_width="wrap_content" android:layout_height="wrap_content" android:background="#0000"/>
+	</LinearLayout>
+	<LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:gravity="center"
+	    android:orientation="horizontal" android:layout_marginTop="5dp">
+	    <ImageButton android:id="@+id/flowerButton" android:src="@drawable/btn_tribute_flower" 
 	        android:layout_width="wrap_content" android:layout_height="wrap_content" android:background="#0000"/>
 	</LinearLayout>
     <LinearLayout android:id="@+id/memoryTitleLayout" android:layout_width="fill_parent" android:layout_height="wrap_content"

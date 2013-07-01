@@ -26,6 +26,7 @@ public class UserInfo extends BaseActivity {
 	String mMessage;
 	static final String TAG = "UserInfo";
 	ProgressBar pageLoading = null;
+	String checkType = "2";
 	
 	@Override
     public void onCreate(Bundle icicle) {
@@ -36,6 +37,7 @@ public class UserInfo extends BaseActivity {
         new TopMenuInitializer(thisContext, (View)findViewById(R.id.top_menubar), "고인찾기");
         
         tomb = (Tomb)getIntent().getSerializableExtra("tomb");
+        checkType = getIntent().getStringExtra("check_type");
         
         pageLoading = (ProgressBar)findViewById(R.id.pageLoading);
         TextView userName = (TextView)findViewById(R.id.userName);
@@ -47,6 +49,10 @@ public class UserInfo extends BaseActivity {
         TextView payName = (TextView)findViewById(R.id.payName);
         TextView deadID = (TextView)findViewById(R.id.deadID);
         TextView deadDate = (TextView)findViewById(R.id.deadDate);
+        
+        if(checkType.equals("1")){
+        	infoButton1.setVisibility(View.GONE);
+        }
         
         userName.setText(tomb.getDeadName());
         userSex.setText(tomb.getDeadSex());
@@ -60,7 +66,35 @@ public class UserInfo extends BaseActivity {
 			
 			@Override
 			public void onClick(View arg0) {
+				//12위, 1위, 4위, 6위, 개나리, 개나리6기, 무궁화, 철쭉, 2추모관, 1추모관
+				
+				String mapInfo = "";
+				if(tomb.getSType().equals("개나리")){
+					mapInfo = "http://www.cyberyoungrak.or.kr/map6";
+				} else if(tomb.getSType().equals("철쭉")){
+					mapInfo = "http://www.cyberyoungrak.or.kr/map1";
+				} else if(tomb.getSType().equals("무궁화")){
+					//mapInfo = "http://www.cyberyoungrak.or.kr/map1";
+				} else if(tomb.getSType().equals("12위")){
+					mapInfo = "http://www.cyberyoungrak.or.kr/map4";
+				} else if(tomb.getSType().equals("1위")){
+					
+				} else if(tomb.getSType().equals("4위")){
+					
+				} else if(tomb.getSType().equals("6위")){
+					mapInfo = "http://www.cyberyoungrak.or.kr/map3";
+				} else if(tomb.getSType().equals("개나리6기")){
+					mapInfo = "http://www.cyberyoungrak.or.kr/map6";
+				} else if(tomb.getSType().equals("1추모관")){
+					mapInfo = "http://www.cyberyoungrak.or.kr/map9";
+				} else if(tomb.getSType().equals("2추모관")){
+					mapInfo = "http://www.cyberyoungrak.or.kr/map10";
+				}
+				
+				Log.d(TAG, "tomb.getSType()="+tomb.getSType() +" mapInfo="+mapInfo);
+				
 				Intent i = new Intent(thisContext, MapInfo.class);
+				i.putExtra("mapinfo", mapInfo);
 				startActivity(i);
 				
 			}

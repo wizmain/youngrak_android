@@ -81,6 +81,7 @@ public class UserSearch extends BaseActivity implements RadioGroup.OnCheckedChan
         		Intent i = new Intent(thisContext, UserInfo.class);
         		Tomb t = mListData.get(position);
         		i.putExtra("tomb", t);
+        		i.putExtra("check_type", areaType);
         		startActivity(i);
         	}
         });
@@ -109,7 +110,7 @@ public class UserSearch extends BaseActivity implements RadioGroup.OnCheckedChan
 		try{
 			
 			ApplicationEx app = (ApplicationEx)this.getApplication();
-			String url = Constant.USER_SEARCH_URL + "?area_type="+areaType+"&dead_name="+searchText.getText().toString();
+			String url = Constant.USER_SEARCH_URL + "?check_type="+areaType+"&dead_name="+searchText.getText().toString();
 			String result = HttpDataHelper.getHttpJsonData(app.getHttpClient(), url, "GET", null, -1);
 			
 			Log.d(TAG, result);
@@ -150,16 +151,8 @@ public class UserSearch extends BaseActivity implements RadioGroup.OnCheckedChan
     	}
 	}
 	
-	// AsyncTask클래스는 항상 Subclassing 해서 사용 해야 함.
- 	// 사용 자료형은
- 	// background 작업에 사용할 data의 자료형: String 형
- 	// background 작업 진행 표시를 위해 사용할 인자: Integer형
- 	// background 작업의 결과를 표현할 자료형: Long
- 	private class PageLoadTask extends AsyncTask<String, Integer, Integer> {
+	private class PageLoadTask extends AsyncTask<String, Integer, Integer> {
  		
- 		// 이곳에 포함된 code는 AsyncTask가 execute 되자 마자 UI 스레드에서 실행됨.
- 		// 작업 시작을 UI에 표현하거나
- 		// background 작업을 위한 ProgressBar를 보여 주는 등의 코드를 작성.
  		protected void onPreExecute(){
  			super.onPreExecute();
  			
@@ -167,7 +160,6 @@ public class UserSearch extends BaseActivity implements RadioGroup.OnCheckedChan
  				pageLoading.setVisibility(View.VISIBLE);
  		}
  		
- 		// UI 스레드에서 AsynchTask객체.execute(...) 명령으로 실행되는 callback
  		@Override
  		protected Integer doInBackground(String... args) {
 
@@ -175,9 +167,6 @@ public class UserSearch extends BaseActivity implements RadioGroup.OnCheckedChan
  			return 0;
  		}
  		
- 		// onInBackground(...)가 완료되면 자동으로 실행되는 callback
- 		// 이곳에서 onInBackground가 리턴한 정보를 UI위젯에 표시 하는 등의 작업을 수행함.
- 		// (예제에서는 작업에 걸린 총 시간을 UI위젯 중 TextView에 표시함)
  		protected void onPostExecute(Integer result) {
  			if(pageLoading != null)
  				pageLoading.setVisibility(View.GONE);
@@ -190,14 +179,14 @@ public class UserSearch extends BaseActivity implements RadioGroup.OnCheckedChan
  	        
  	        	mListView.setAdapter(adapter);
 
+ 	        	if(mListData.size() == 0){
+ 	        		mMessage = "데이타가 없습니다.";
+ 	        		thisHandler.post(showDialog);
+ 	        	}
  	    	}
     		
  		}
  		
- 		
- 		// AsyncTask.cancel(boolean) 메소드가 true 인자로
- 		// 실행되면 호출되는 콜백.
- 		// background 작업이 취소될때 꼭 해야될 작업은  여기에 구현.
  		@Override
  		protected void onCancelled() {
  			// TODO Auto-generated method stub

@@ -54,7 +54,7 @@ public class TributeMovieUpload extends BaseActivity {
         super.onCreate(icicle);
         setContentView(R.layout.movie_upload);
         
-        new TopMenuInitializer(this, (View)findViewById(R.id.top_menubar), "동영상등록");
+        new TopMenuInitializer(this, (View)findViewById(R.id.top_menubar), "동영상및육성파일등록");
         
         cm1ID = getIntent().getStringExtra("cm1ID");
         
@@ -68,7 +68,7 @@ public class TributeMovieUpload extends BaseActivity {
 				Intent intent = new Intent();
 				intent.setType("video/*");
 				intent.setAction(Intent.ACTION_GET_CONTENT);
-				startActivityForResult(Intent.createChooser(intent, "동영상선택"),1);
+				startActivityForResult(Intent.createChooser(intent, "동영상및육성선택"),1);
 			}
 		});
         ImageButton imageUploadButton = (ImageButton)findViewById(R.id.imageUpload);
@@ -82,7 +82,7 @@ public class TributeMovieUpload extends BaseActivity {
 					String filePath = getRealPathFromURI(selectedUri);
 					File f = new File(filePath);
 					Log.d(TAG, "f.length()="+f.length());
-					if(f.length() > 33439782){
+					if(f.length() > 55439782){
 						DialogUtils.alert(thisContext, "", "동영상 사이즈가 너무 큽니다.");
 					} else {
 						new FileUploadTask().execute(filePath, cm1ID);
